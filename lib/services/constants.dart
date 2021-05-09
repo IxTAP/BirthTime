@@ -4,11 +4,11 @@
 
 
 const String LEVEL_TOTAL = "Total";
-const String LEVEL_YEAR = "Années";
+const String LEVEL_YEAR = "  Années  ";
 const String LEVEL_DAY = "Jours";
 const String LEVEL_MONTH = "Mois";
-const String LEVEL_HOUR = "Heures";
-const String LEVEL_MINUT = "Minutes";
+const String LEVEL_HOUR = "  Heures  ";
+const String LEVEL_MINUT = "  Minutes  ";
 
 const List<String> LIST_LEVEL = [
   LEVEL_YEAR,
@@ -16,6 +16,16 @@ const List<String> LIST_LEVEL = [
   LEVEL_DAY,
   LEVEL_HOUR,
   LEVEL_MINUT
+];
+
+const List<String> LIST_DAYS = [
+  'Dimanche',
+  'Lundi',
+  'Mardi',
+  'Mercredi',
+  'Jeudi',
+  'Vendredi',
+  'Samedi',
 ];
 
 const List<String> LIST_MONTHS = [

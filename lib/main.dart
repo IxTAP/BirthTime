@@ -1,6 +1,8 @@
+import 'package:birthtime/widgets/ephemeride.dart';
 import 'package:birthtime/widgets/tooglebuttons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'widgets/calendar.dart';
 import 'package:provider/provider.dart';
 import 'package:birthtime/models/birthDateModel.dart';
@@ -24,6 +26,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: title,
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('fr','FR'),
+        const Locale('en', ''),
+      ],
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -53,8 +64,10 @@ class _MyHomePageState extends State<MyHomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            //Text(AppLocalizations.of(context)!.helloWorld),
             BDToggleButtons(key: UniqueKey()),
-            BirthCalendar(),
+            Ephemeride(),
+            //BirthCalendar(),
           ],
         ),
       ),

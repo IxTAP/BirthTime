@@ -28,17 +28,29 @@ class _BDToggleButtonsState extends State<BDToggleButtons> {
           }).toList(),
           onPressed: (int index) => _switchLevel(index),
           isSelected: _isSelected,
+          borderColor: Colors.black,
+          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+          selectedBorderColor: Colors.black,
+          selectedColor: Colors.black,
+          fillColor: Colors.black12,
+          disabledColor: Colors.black,
+          color: Colors.black,
+          textStyle: TextStyle(fontWeight: FontWeight.bold,),
         ),
         SizedBox(
-            height: 20.0
+            height: 8.0
         ),
         Text(
           '${context.watch<BirthDateModel>().response}',
         ),
+        SizedBox(
+        height: 12.0
+        ),
         Text(
           '${context.watch<BirthDateModel>().fullResponse}',
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
         ),
-        SizedBox(height: 60.0),
+        SizedBox(height: 30.0),
       ],
     );
   }
