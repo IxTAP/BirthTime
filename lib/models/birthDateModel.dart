@@ -1,13 +1,14 @@
-// Utile pour le type TimeOfDay
+// Used by TimeOfDay
 import 'package:flutter/material.dart';
-import 'package:birthtime/services/constants.dart' as Constants;
 import 'package:birthtime/services/BirthDateService.dart';
+import 'package:intl/intl.dart';
 
 class BirthDateModel extends ChangeNotifier {
+
   BirthDateService _service = BirthDateService();
 
   ///
-  /// Initialisation des variables du modèle
+  /// Init model vars
   ///
   DateTime _birthDate = DateTime.utc(
     DateTime.now().year,
@@ -18,56 +19,82 @@ class BirthDateModel extends ChangeNotifier {
   );
 
   TimeOfDay _birthTime = TimeOfDay.now();
+  String _dayOfWeekString = DateFormat(DateFormat.WEEKDAY).format(DateTime.now());
+  String _monthString = DateFormat(DateFormat.MONTH).format(DateTime.now());
+
+  int _nbYears = 0;
+  int _nbMonths = 0;
+  int _nbDays = 0;
+  int _nbHours = 0;
+  int _nbMinutes = 0;
+
+  int _nbFullYears = 0;
+  int _nbFullMonths = 0;
+  int _nbFullDays = 0;
+  int _nbFullHours = 0;
+  int _nbFullMinutes = 0;
+
   Duration _difference = Duration();
   String _response = 'Tap on calendar to change...';
   String _fullResponse = '';
-  String _level = Constants.LEVEL_YEAR;
+  int _level = 0;
 
   ///
   /// Getters
   ///
   DateTime get birthDate => _birthDate;
+  String get dayOfWeek => _dayOfWeekString;
+  String get month => _monthString;
   TimeOfDay get birthTime => _birthTime;
   Duration get difference => _difference;
   String get response => _response;
   String get fullResponse => _fullResponse;
 
+  // For level response
+  int get nbFullYears => _nbFullYears;
+  int get nbFullMonths => _nbFullMonths;
+  int get nbFullDays => _nbFullDays;
+  int get nbFullHours => _nbFullHours;
+  int get nbFullMinutes => _nbFullMinutes;
+
+  // For second response (x years, x months, x days, x hours, x minutes)
+  int get nbYears => _nbYears;
+  int get nbMonths => _nbMonths;
+  int get nbDays => _nbDays;
+  int get nbHours => _nbHours;
+  int get nbMinutes => _nbMinutes;
+
   ///
-  /// Notifications des changements (Provider)
+  /// Notify changes (Provider)
   ///
-  void birthDateChange(DateTime newDate) {
+  void birthTimeChange(DateTime newDate, TimeOfDay newTime) {
     _birthDate = newDate;
-    notifyListeners();
-  }
-
-  void birthTimeChange(TimeOfDay newTime) {
     _birthTime = newTime;
-    notifyListeners();
-  }
 
-  void differenceChange() {
     _difference = DateTime.now().toUtc().difference(this._birthDate.toUtc());
-    notifyListeners();
-  }
 
-  void responseChange(String response) {
-    _response = response;
-    notifyListeners();
-  }
+    _nbFullYears = _service.getFullYears(_difference);
+    _nbFullMonths = _service.getFullMonths(difference);
+    _nbFullDays = _service.getFullDays(difference);
+    _nbFullHours = _service.getFullHours(difference);
+    _nbFullMinutes = _service.getFullMinutes(difference);
 
-  void fullResponseChange(String fullResponse) {
-    _fullResponse = fullResponse;
+    List<int> elapsedTime = _service.getFullElapsedTime(birthDate);
+    _nbYears = elapsedTime[0];
+    _nbMonths = elapsedTime[1];
+    _nbDays = elapsedTime[2];
+    _nbHours = elapsedTime[3];
+    _nbMinutes = elapsedTime[4];
+
     notifyListeners();
   }
 
   ///
-  /// Methodes publiques
+  /// public methods
   ///
 
   // Pop-up DATE
   selectDate(BuildContext context) async {
-    DateTime newDate = DateTime.now();
-
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate:_birthDate ,
@@ -77,7 +104,7 @@ class BirthDateModel extends ChangeNotifier {
     );
 
     if (picked != null) {
-      newDate = DateTime(
+      _birthDate = DateTime(
         picked.year,
         picked.month,
         picked.day,
@@ -85,10 +112,11 @@ class BirthDateModel extends ChangeNotifier {
         _birthTime.minute,
       );
 
-      birthDateChange(newDate);
-
-      // Ouvre la pop-up du timer
+      // Show timer
       await selectTime(context);
+
+      // Update public vars
+      birthTimeChange(_birthDate, _birthTime);
     }
   }
 
@@ -103,7 +131,6 @@ class BirthDateModel extends ChangeNotifier {
     );
 
     if (pickedTime != null) {
-
       _birthTime = pickedTime;
       _birthDate = DateTime(
         _birthDate.year,
@@ -113,45 +140,5 @@ class BirthDateModel extends ChangeNotifier {
         pickedTime.minute,
       );
     }
-
-    // Mise à jour des variables exposées
-    birthTimeChange(_birthTime);
-    differenceChange();
-    getStringByLevel(_level);
-    responseChange(_response);
-  }
-
-  // REPONSE
-  void getStringByLevel(String level) {
-    _level = level;
-    var res = '';
-    switch(level) {
-      case Constants.LEVEL_YEAR:
-        res = _service.getResponseForYear(_difference);
-        break;
-      case Constants.LEVEL_MONTH :
-        res = _service.getResponseForMonths(_difference);
-        break;
-      case Constants.LEVEL_DAY:
-        res = _service.getResponseForDays(_difference);
-        break;
-      case Constants.LEVEL_HOUR:
-        res = _service.getResponseForHours(_difference);
-        break;
-      case Constants.LEVEL_MINUT:
-        res = _service.getResponseForMinuts(_difference);
-        break;
-      case Constants.LEVEL_TOTAL:
-        res = _service.getFullElapsedTime(_birthDate);
-        break;
-      default :
-        res = "T O D O  !!!";
-    }
-
-    _response = res;
-    var fullResponse = _service.getFullElapsedTime(_birthDate);
-
-    responseChange(_response);
-    fullResponseChange(fullResponse);
   }
 }

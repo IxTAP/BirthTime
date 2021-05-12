@@ -1,13 +1,11 @@
-//import 'package:flutter/cupertino.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:birthtime/services/constants.dart' as Constants;
 
 class BirthDateService extends ChangeNotifier {
-  final format = DateFormat("EEEE, MMMM d, yyyy 'at' h:mma");
-  NumberFormat numberFormat = NumberFormat.decimalPattern('fr');
 
-  // Ajoute un zéro si nombre a 1 seul caractère.
+  // Add zero on left if number is under ten.
+  // Used by togglebuttons to format digital clock.
   String format2chars(int number) {
     if (number < 10) {
       return number.toString().padLeft(2, '0');
@@ -16,48 +14,44 @@ class BirthDateService extends ChangeNotifier {
     return number.toString();
   }
 
-  String formatDecimal(int number) {
-    return numberFormat.format(number);
+  int getFullYears(Duration difference) {
+    return (difference.inDays / Constants.NB_DAYS_PER_YEAR).floor();
   }
 
-  String getResponseForYear(Duration difference) {
-    return '${formatDecimal((difference.inDays / Constants.NB_DAYS_PER_YEAR).floor())} an(s)';
+  int getFullMonths(Duration difference) {
+    return (difference.inDays / Constants.NB_DAYS_PRE_MONTH).floor();
   }
 
-  String getResponseForMonths(Duration difference) {
-    return '${formatDecimal((difference.inDays / Constants.NB_DAYS_PRE_MONTH).floor())} mois';
+  int getFullDays(Duration difference) {
+    return difference.inDays;
   }
 
-  String getResponseForDays(Duration difference) {
-    return '${formatDecimal(difference.inDays)} jour(s)';
+  int getFullHours(Duration difference) {
+    return difference.inHours;
   }
 
-  String getResponseForMinuts(Duration difference) {
-    return '${formatDecimal(difference.inMinutes)} minute(s)';
+  int getFullMinutes(Duration difference) {
+    return difference.inMinutes;
   }
 
-  String getResponseForHours(Duration difference) {
-    return '${formatDecimal(difference.inHours)} heure(s)';
-  }
+  List<int> getFullElapsedTime(DateTime birthDate) {
+    DateTime currentDate = DateTime.now().toUtc();
+    Duration difference = currentDate.difference(birthDate);
 
-  String getFullElapsedTime(DateTime birthDate) {
-    var currentDate = DateTime.now().toUtc();
-    var difference = currentDate.difference(birthDate);
-
-    var diffAnnees = difference.inDays / Constants.NB_DAYS_PER_YEAR;
-    birthDate = DateTime(birthDate.year + diffAnnees.floor(), birthDate.month, birthDate.day, birthDate.hour, birthDate.minute);
+    int diffAnnees = (difference.inDays / Constants.NB_DAYS_PER_YEAR).floor();
+    birthDate = DateTime(birthDate.year + diffAnnees, birthDate.month, birthDate.day, birthDate.hour, birthDate.minute);
     difference = currentDate.difference(birthDate);
 
-    var diffMois = difference.inDays / Constants.NB_DAYS_PRE_MONTH;
-    birthDate = DateTime(birthDate.year, birthDate.month+diffMois.floor(), birthDate.day, birthDate.hour, birthDate.minute);
+    int diffMois = (difference.inDays / Constants.NB_DAYS_PRE_MONTH).floor();
+    birthDate = DateTime(birthDate.year, birthDate.month+diffMois, birthDate.day, birthDate.hour, birthDate.minute);
     difference = currentDate.difference(birthDate);
 
-    // Pas besoin de variable pour les jours, c'est déjà dans Different.inDays
+    int diffJours = difference.inDays;
 
-    var diffHeures = difference.inDays % Constants.NB_HOURS_PER_DAY;
+    int diffHeures = difference.inDays % Constants.NB_HOURS_PER_DAY;
 
-    var diffMinutes = difference.inMinutes % Constants.NB_MINUTS_PER_HOUR;
+    int diffMinutes = difference.inMinutes % Constants.NB_MINUTS_PER_HOUR;
 
-    return '${diffAnnees.floor()} ans, ${diffMois.floor()} mois, ${difference.inDays} jours\n$diffHeures heures et $diffMinutes minutes';
+    return [diffAnnees, diffMois, diffJours, diffHeures, diffMinutes];
   }
 }

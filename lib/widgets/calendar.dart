@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:birthtime/services/BirthDateService.dart';
-import 'package:birthtime/services/constants.dart' as Constants;
 import 'package:segment_display/segment_display.dart';
 import 'package:birthtime/models/birthDateModel.dart';
 import 'package:provider/provider.dart';
 
 ///
-/// Widget qui affiche le calendrier et l'horloge.
-/// Il ouvre les champs de saisie et mets à jour le model.
+/// Widget that display calendar and time select widget.
+/// And update the model.
 ///
 class BirthCalendar extends StatelessWidget {
 
@@ -16,7 +15,7 @@ class BirthCalendar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return
-      // Réagit au Tap sur l'ensemble de la colonne
+      // React on Tap on the whole column
       Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -37,7 +36,7 @@ class BirthCalendar extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: Center(
                       child: Text(
-                        '${Constants.LIST_MONTHS[context.watch<BirthDateModel>().birthDate.month-1]}',
+                        '${context.watch<BirthDateModel>().month}',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20.0,

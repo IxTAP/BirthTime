@@ -3,14 +3,13 @@ import 'package:birthtime/widgets/tooglebuttons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'widgets/calendar.dart';
 import 'package:provider/provider.dart';
 import 'package:birthtime/models/birthDateModel.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 void main() {
-  // On définit un Provider sur le BirtDateModel
-  // Il sera utilisable dans toutes les classes filles
-  // qui feront appel au BirthDateModel
+  // Define a Provider on BirtDateModel
+  // Used by all children Widget and classes
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => BirthDateModel()),
@@ -20,26 +19,37 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  final String title ="Birth Time Elapsed";
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
-      title: title,
+      onGenerateTitle: (context) {
+        return AppLocalizations.of(context)!.appTitle;
+      },
       localizationsDelegates: [
+        AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: [
-        const Locale('fr','FR'),
+        const Locale('fr',''),
         const Locale('en', ''),
+        const Locale('es', ''),
+        const Locale('it', ''),
       ],
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        //primarySwatch: Colors.blue,
+        //scaffoldBackgroundColor: Colors.lightBlueAccent[100],
       ),
-      home: MyHomePage(title: title),
+      initialRoute: '/',
+      routes: {
+        '/': (context) {
+          return MyHomePage(title: AppLocalizations.of(context)!.appTitle);
+        }
+      },
     );
   }
 }
@@ -60,11 +70,11 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        backgroundColor: Colors.red,
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            //Text(AppLocalizations.of(context)!.helloWorld),
             BDToggleButtons(key: UniqueKey()),
             Ephemeride(),
             //BirthCalendar(),
@@ -73,5 +83,4 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-
 }

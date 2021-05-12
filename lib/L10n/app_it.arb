@@ -1,0 +1,46 @@
+{
+    "appTitle": "BirthDate Elapsed",
+
+    "levelYear": "Anni",
+    "levelMonth": "Mesi",
+    "levelDay": "Jiorni",
+    "levelHours": "Ore",
+    "levelMinuts": "Minuti",
+
+    "andSeparator": "e",
+
+   "diffYears": "{count, plural, =0{anni} =1{anno} other{anni}",
+   "@diffYears": {
+       "placeholders": {
+           "count": {}
+       }
+   },
+
+   "diffMonths": "{count, plural, =0{mesi} =1{mese} other{mesi}",
+   "@diffMonths": {
+       "placeholders": {
+           "count": {}
+       }
+   },
+
+   "diffDays": "{count, plural, =0{jiorni} =1{jiorno} other{jiorni}",
+   "@diffDays": {
+       "placeholders": {
+           "count": {}
+       }
+   },
+
+   "diffHours": "{count, plural, =0{ore} =1{ora} other{ore}",
+   "@diffHours": {
+       "placeholders": {
+           "count": {}
+       }
+   },
+
+   "diffMinutes": "{count, plural, =0{minuti} =1{minuto} other{minuti}",
+   "@diffMinutes": {
+       "placeholders": {
+           "count": {}
+       }
+   }
+}
