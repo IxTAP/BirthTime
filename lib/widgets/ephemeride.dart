@@ -22,120 +22,131 @@ class Ephemeride extends StatelessWidget {
         Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        Text(
+          'Tap on calendar to change.',
+        ),
         InkWell(
           onTap: () => context.read<BirthDateModel>().selectDate(context),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
+            child: Container (
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: Colors.black12,
-                  width: 18.0,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: Offset(3, 5), // changes position of shadow
-                  ),
-                ],
+                  color: Colors.black,
+                  width: 1.0,
+                )
               ),
-              child: Column(
-                children: [
-                  Container(
-                    //height: 40.0,
-                    width: MediaQuery.of(context).size.width / 2,
-                    padding: EdgeInsets.only(bottom: 12.0),
-                    decoration: BoxDecoration(
-                      border: Border(
-                          top: BorderSide(color: Colors.black,),
-                          right: BorderSide(color: Colors.black,),
-                          left: BorderSide(color: Colors.black,)
-                      ),
-                      color: Colors.white,
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.black12,
+                    width: 18.0,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(5, 7), // changes position of shadow
                     ),
-                    child: Center(
-                      child: Text(
-                        '${context.watch<BirthDateModel>().birthDate.year}',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.0,
-                            color: Colors.black,
-                            letterSpacing: 5.0,
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    Container(
+                      //height: 40.0,
+                      width: MediaQuery.of(context).size.width / 2,
+                      padding: EdgeInsets.only(bottom: 12.0),
+                      decoration: BoxDecoration(
+                        border: Border(
+                            top: BorderSide(color: Colors.black,),
+                            right: BorderSide(color: Colors.black,),
+                            left: BorderSide(color: Colors.black,)
+                        ),
+                        color: Colors.white,
+                      ),
+                      child: Center(
+                        child: Text(
+                          '${context.watch<BirthDateModel>().birthDate.year}',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0,
+                              color: Colors.black,
+                              letterSpacing: 5.0,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width / 2,
-                    decoration: BoxDecoration(
-                    border: Border(
-                        right: BorderSide(color: Colors.black,),
-                        left: BorderSide(color: Colors.black),
-                    ),
-                      color: Colors.white,
-                  ),
-                    child: Center(
-                      child: Text(
-                        DateFormat(DateFormat.WEEKDAY, translate?.localeName)
-                            .format(context.watch<BirthDateModel>().birthDate)
-                            .toUpperCase(),
-                        style: TextStyle(
-                            fontFamily: 'Serif',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.0,
-                            color: Colors.black),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width / 2,
-                    decoration: BoxDecoration(
+                    Container(
+                      width: MediaQuery.of(context).size.width / 2,
+                      decoration: BoxDecoration(
                       border: Border(
                           right: BorderSide(color: Colors.black,),
                           left: BorderSide(color: Colors.black),
                       ),
-                      color: Colors.white,
+                        color: Colors.white,
                     ),
-                    child: Center(
-                      child: Text(
-                        '${context.watch<BirthDateModel>().birthDate.day}',
-                        style: TextStyle(
-                          fontFamily: 'Serif',
-                          fontWeight: FontWeight.bold,
-                          fontSize: 120.0,
-                          color: Colors.redAccent,
+                      child: Center(
+                        child: Text(
+                          DateFormat(DateFormat.WEEKDAY, translate?.localeName)
+                              .format(context.watch<BirthDateModel>().birthDate)
+                              .toUpperCase(),
+                          style: TextStyle(
+                              fontFamily: 'Serif',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0,
+                              color: Colors.black),
                         ),
                       ),
                     ),
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width / 2,
-                    padding: EdgeInsets.only(bottom: 12.0),
-                    decoration: BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(color: Colors.black,),
-                        right: BorderSide(color: Colors.black,),
-                        left: BorderSide(color: Colors.black),
+                    Container(
+                      width: MediaQuery.of(context).size.width / 2,
+                      decoration: BoxDecoration(
+                        border: Border(
+                            right: BorderSide(color: Colors.black,),
+                            left: BorderSide(color: Colors.black),
+                        ),
+                        color: Colors.white,
                       ),
-                      color: Colors.white,
-                    ),
-                    child: Center(
-                      child: Text(
-                        DateFormat(DateFormat.MONTH, translate?.localeName)
-                            .format(context.watch<BirthDateModel>().birthDate)
-                            .toUpperCase(),
-                        style: TextStyle(
-                          fontFamily: 'Serif',
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20.0,
-                          color: Colors.black,
+                      child: Center(
+                        child: Text(
+                          '${context.watch<BirthDateModel>().birthDate.day}',
+                          style: TextStyle(
+                            fontFamily: 'Serif',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 120.0,
+                            color: Colors.redAccent,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                    Container(
+                      width: MediaQuery.of(context).size.width / 2,
+                      padding: EdgeInsets.only(bottom: 12.0),
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(color: Colors.black,),
+                          right: BorderSide(color: Colors.black,),
+                          left: BorderSide(color: Colors.black),
+                        ),
+                        color: Colors.white,
+                      ),
+                      child: Center(
+                        child: Text(
+                          DateFormat(DateFormat.MONTH, translate?.localeName)
+                              .format(context.watch<BirthDateModel>().birthDate)
+                              .toUpperCase(),
+                          style: TextStyle(
+                            fontFamily: 'Serif',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -150,11 +161,12 @@ class Ephemeride extends StatelessWidget {
             children: [
               Container(
                 width: MediaQuery.of(context).size.width / 2,
-                height: 60.0,
+                height: 80.0,
                 decoration: BoxDecoration(
-                  color: Colors.black12,
+                  color: Colors.black26,
                   border: Border.all(
                     color: Colors.black,
+                    width: 2.5
                   ),
                   borderRadius: BorderRadius.all(Radius.circular(8.0)),
                 ),
@@ -165,11 +177,11 @@ class Ephemeride extends StatelessWidget {
                         ':' +
                         _service.format2chars(
                             context.watch<BirthDateModel>().birthDate.minute),
-                    size: 4.0,
+                    size: 5.0,
                     characterSpacing: 8,
                     backgroundColor: Colors.transparent,
                     segmentStyle: DefaultSegmentStyle(
-                      enabledColor: Colors.lightGreen[600],
+                      enabledColor: Colors.redAccent,
                       disabledColor: Colors.transparent,
                     ),
                   ),
@@ -177,6 +189,9 @@ class Ephemeride extends StatelessWidget {
               ),
             ],
           ),
+        ),
+        SizedBox(
+          height: 20.0,
         ),
       ],
     );

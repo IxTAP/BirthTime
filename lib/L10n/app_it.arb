@@ -1,9 +1,9 @@
 {
-    "appTitle": "BirthDate Elapsed",
+    "appTitle": "Tempo trascorso",
 
     "levelYear": "Anni",
     "levelMonth": "Mesi",
-    "levelDay": "Jiorni",
+    "levelDay": "Giorni",
     "levelHours": "Ore",
     "levelMinuts": "Minuti",
 
@@ -23,7 +23,7 @@
        }
    },
 
-   "diffDays": "{count, plural, =0{jiorni} =1{jiorno} other{jiorni}",
+   "diffDays": "{count, plural, =0{giorni} =1{giorno} other{giorni}",
    "@diffDays": {
        "placeholders": {
            "count": {}
