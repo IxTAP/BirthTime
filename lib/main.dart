@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:birthtime/models/birthDateModel.dart';
+import 'package:birthtime/services/BirthDateService.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 void main() {
@@ -40,10 +41,6 @@ class MyApp extends StatelessWidget {
         const Locale('it', ''),
       ],
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        //primarySwatch: Colors.blue,
-        //scaffoldBackgroundColor: Colors.lightBlueAccent[100],
-      ),
       initialRoute: '/',
       routes: {
         '/': (context) {
@@ -65,6 +62,18 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+  BirthDateService _service = BirthDateService();
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Launch selectDate and time on startup
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      _service.selectDate(context);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,7 +86,6 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             BDToggleButtons(key: UniqueKey()),
             Ephemeride(),
-            //BirthCalendar(),
           ],
         ),
       ),

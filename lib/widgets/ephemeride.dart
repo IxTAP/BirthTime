@@ -22,11 +22,10 @@ class Ephemeride extends StatelessWidget {
         Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
-          'Tap on calendar to change.',
-        ),
         InkWell(
-          onTap: () => context.read<BirthDateModel>().selectDate(context),
+          onTap: () {
+            _service.selectDate(context);
+          },
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container (
@@ -56,7 +55,7 @@ class Ephemeride extends StatelessWidget {
                     Container(
                       //height: 40.0,
                       width: MediaQuery.of(context).size.width / 2,
-                      padding: EdgeInsets.only(bottom: 12.0),
+                      padding: EdgeInsets.only(top: 12.0, bottom: 12.0),
                       decoration: BoxDecoration(
                         border: Border(
                             top: BorderSide(color: Colors.black,),
@@ -155,7 +154,7 @@ class Ephemeride extends StatelessWidget {
           height: 10.0,
         ),
         InkWell(
-          onTap: () => context.read<BirthDateModel>().selectDate(context),
+          onTap: () => _service.selectDate(context),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

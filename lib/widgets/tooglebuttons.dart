@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:birthtime/models/birthDateModel.dart';
+import 'package:birthtime/services/BirthDateService.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
@@ -16,6 +17,7 @@ class _BDToggleButtonsState extends State<BDToggleButtons> {
   List<bool> _isSelected = [true, false, false, false, false];
   int _level = 0;
   List<Widget> _listLevel = [];
+  BirthDateService _service = new BirthDateService();
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +105,9 @@ class _BDToggleButtonsState extends State<BDToggleButtons> {
     });
   }
 
-  // Response
+  ///
+  /// Internationalize response by level
+  ///
   String _translateLevel(int level, AppLocalizations translate) {
     NumberFormat numberFormat = NumberFormat.decimalPattern(translate.localeName);
     int count = 0;
@@ -111,23 +115,23 @@ class _BDToggleButtonsState extends State<BDToggleButtons> {
 
     switch(level) {
       case 0:
-        count = context.watch<BirthDateModel>().nbFullYears;
+        count = _service.getFullYears(context.watch<BirthDateModel>().difference);
         value = numberFormat.format(count) + ' ' + translate.diffYears(count);
         break;
       case 1 :
-        count = context.watch<BirthDateModel>().nbFullMonths;
+        count = _service.getFullMonths(context.watch<BirthDateModel>().difference);
         value = numberFormat.format(count) + ' ' + translate.diffMonths(count);
         break;
       case 2:
-        count = context.watch<BirthDateModel>().nbFullDays;
+        count = _service.getFullDays(context.watch<BirthDateModel>().difference);
         value = numberFormat.format(count) + ' ' + translate.diffDays(count);
         break;
       case 3:
-        count = context.watch<BirthDateModel>().nbFullHours;
+        count = _service.getFullHours(context.watch<BirthDateModel>().difference);
         value = numberFormat.format(count) + ' ' + translate.diffHours(count);
         break;
       case 4:
-        count = context.watch<BirthDateModel>().nbFullMinutes;
+        count = _service.getFullMinutes(context.watch<BirthDateModel>().difference);
         value = numberFormat.format(count) + ' ' + translate.diffMinutes(count);
         break;
       default :
@@ -137,23 +141,17 @@ class _BDToggleButtonsState extends State<BDToggleButtons> {
     return value;
   }
 
+  ///
+  /// Internationalize elapsed time
+  ///
   String _translateElapsedTime(AppLocalizations translate) {
     NumberFormat numberFormat = NumberFormat.decimalPattern(translate.localeName);
-    int count = context.watch<BirthDateModel>().nbYears;
-    String response = numberFormat.format(count) + ' ' + translate.diffYears(count)  + ', ';
-
-    count = context.watch<BirthDateModel>().nbMonths;
-    response += numberFormat.format(count) + ' ' + translate.diffMonths(count)  + ', ';
-
-    count = context.watch<BirthDateModel>().nbDays;
-    response += numberFormat.format(count) + ' ' + translate.diffDays(count)  + ', \n';
-
-    count = context.watch<BirthDateModel>().nbHours;
-    response += numberFormat.format(count) + ' ' + translate.diffHours(count)  + ' ' + translate.andSeparator + ' ';
-
-    count = context.watch<BirthDateModel>().nbMinutes;
-    response += numberFormat.format(count) + ' ' + translate.diffMinutes(count);
-
+    List<int> _elapsedTime = _service.getFullElapsedTime(context.watch<BirthDateModel>().birthDate);
+    String response = numberFormat.format(_elapsedTime[0]) + ' ' + translate.diffYears(_elapsedTime[0])  + ', ';
+    response += numberFormat.format(_elapsedTime[1]) + ' ' + translate.diffMonths(_elapsedTime[1])  + ', ';
+    response += numberFormat.format(_elapsedTime[2]) + ' ' + translate.diffDays(_elapsedTime[2])  + ', \n';
+    response += numberFormat.format(_elapsedTime[3]) + ' ' + translate.diffHours(_elapsedTime[3])  + ' ' + translate.andSeparator + ' ';
+    response += numberFormat.format(_elapsedTime[4]) + ' ' + translate.diffMinutes(_elapsedTime[4]);
 
     return response;
   }
