@@ -7,8 +7,10 @@ import 'package:segment_display/segment_display.dart';
 
 class TimeMachine extends StatefulWidget {
   final Color color;
+  final String title;
 
-  const TimeMachine({Key? key, required this.color}) : super(key: key);
+  const TimeMachine({Key? key, required this.color, required this.title})
+      : super(key: key);
 
   @override
   State<TimeMachine> createState() => _TimeMachineState();
@@ -55,11 +57,11 @@ class _TimeMachineState extends State<TimeMachine> {
                           padding: EdgeInsets.all(20.0),
                           decoration: BoxDecoration(color: Colors.black),
                           child: FourteenSegmentDisplay(
-                            value: "NOV",
+                            value: "OCT",
                             size: segmentSize,
                             segmentStyle: DefaultSegmentStyle(
                               enabledColor: widget.color,
-                              disabledColor: widget.color.withOpacity(0.15),
+                              disabledColor: widget.color.withOpacity(0.3),
                             ),
                           ),
                         ),
@@ -89,7 +91,7 @@ class _TimeMachineState extends State<TimeMachine> {
                             size: segmentSize,
                             segmentStyle: DefaultSegmentStyle(
                               enabledColor: widget.color,
-                              disabledColor: widget.color.withOpacity(0.15),
+                              disabledColor: widget.color.withOpacity(0.3),
                             ),
                           ),
                         ),
@@ -119,7 +121,7 @@ class _TimeMachineState extends State<TimeMachine> {
                             size: segmentSize,
                             segmentStyle: DefaultSegmentStyle(
                               enabledColor: widget.color,
-                              disabledColor: widget.color.withOpacity(0.15),
+                              disabledColor: widget.color.withOpacity(0.3),
                             ),
                           ),
                         ),
@@ -190,11 +192,11 @@ class _TimeMachineState extends State<TimeMachine> {
                           padding: EdgeInsets.all(20.0),
                           decoration: BoxDecoration(color: Colors.black),
                           child: SevenSegmentDisplay(
-                            value: "06",
+                            value: "01",
                             size: segmentSize,
                             segmentStyle: DefaultSegmentStyle(
                               enabledColor: widget.color,
-                              disabledColor: widget.color.withOpacity(0.15),
+                              disabledColor: widget.color.withOpacity(0.3),
                             ),
                           ),
                         ),
@@ -250,11 +252,11 @@ class _TimeMachineState extends State<TimeMachine> {
                           padding: EdgeInsets.all(20.0),
                           decoration: BoxDecoration(color: Colors.black),
                           child: SevenSegmentDisplay(
-                            value: "28",
+                            value: "22",
                             size: segmentSize,
                             segmentStyle: DefaultSegmentStyle(
                               enabledColor: widget.color,
-                              disabledColor: widget.color.withOpacity(0.15),
+                              disabledColor: widget.color.withOpacity(0.3),
                             ),
                           ),
                         ),
@@ -265,12 +267,12 @@ class _TimeMachineState extends State<TimeMachine> {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(top: 12.0),
+              margin: EdgeInsets.only(top: 12.0, bottom: 8.0),
               decoration: BoxDecoration(color: Colors.black),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "DESTINATION TIME",
+                  widget.title,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
