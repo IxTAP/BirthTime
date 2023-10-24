@@ -57,7 +57,15 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             BDToggleButtons(key: UniqueKey()),
             //BirthCalendar(),
-            TimeMachine(),
+            TimeMachine(
+              color: Colors.red,
+            ),
+            TimeMachine(
+              color: Colors.green,
+            ),
+            TimeMachine(
+              color: Colors.blue,
+            ),
           ],
         ),
       ),

@@ -6,7 +6,9 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:segment_display/segment_display.dart';
 
 class TimeMachine extends StatefulWidget {
-  const TimeMachine({Key? key}) : super(key: key);
+  final Color color;
+
+  const TimeMachine({Key? key, required this.color}) : super(key: key);
 
   @override
   State<TimeMachine> createState() => _TimeMachineState();
@@ -19,7 +21,15 @@ class _TimeMachineState extends State<TimeMachine> {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        decoration: BoxDecoration(color: Colors.grey),
+        decoration: BoxDecoration(color: Colors.grey, boxShadow: [
+          const BoxShadow(
+              color: Colors.black,
+              blurRadius: 8.0,
+              offset: Offset(
+                8.0,
+                8.0,
+              ))
+        ]),
         child: Column(
           children: [
             Container(
@@ -48,8 +58,8 @@ class _TimeMachineState extends State<TimeMachine> {
                             value: "NOV",
                             size: segmentSize,
                             segmentStyle: DefaultSegmentStyle(
-                              enabledColor: Colors.red,
-                              disabledColor: Colors.red.withOpacity(0.15),
+                              enabledColor: widget.color,
+                              disabledColor: widget.color.withOpacity(0.15),
                             ),
                           ),
                         ),
@@ -78,8 +88,8 @@ class _TimeMachineState extends State<TimeMachine> {
                             value: "05",
                             size: segmentSize,
                             segmentStyle: DefaultSegmentStyle(
-                              enabledColor: Colors.red,
-                              disabledColor: Colors.red.withOpacity(0.15),
+                              enabledColor: widget.color,
+                              disabledColor: widget.color.withOpacity(0.15),
                             ),
                           ),
                         ),
@@ -108,8 +118,8 @@ class _TimeMachineState extends State<TimeMachine> {
                             value: "1955",
                             size: segmentSize,
                             segmentStyle: DefaultSegmentStyle(
-                              enabledColor: Colors.red,
-                              disabledColor: Colors.red.withOpacity(0.15),
+                              enabledColor: widget.color,
+                              disabledColor: widget.color.withOpacity(0.15),
                             ),
                           ),
                         ),
@@ -142,7 +152,7 @@ class _TimeMachineState extends State<TimeMachine> {
                         ),
                         Icon(
                           Icons.circle,
-                          color: Colors.red,
+                          color: widget.color,
                         ),
                         Container(
                           color: Colors.red,
@@ -183,8 +193,8 @@ class _TimeMachineState extends State<TimeMachine> {
                             value: "06",
                             size: segmentSize,
                             segmentStyle: DefaultSegmentStyle(
-                              enabledColor: Colors.red,
-                              disabledColor: Colors.red.withOpacity(0.15),
+                              enabledColor: widget.color,
+                              disabledColor: widget.color.withOpacity(0.15),
                             ),
                           ),
                         ),
@@ -210,11 +220,11 @@ class _TimeMachineState extends State<TimeMachine> {
                           children: [
                             Icon(
                               Icons.circle,
-                              color: Colors.red,
+                              color: widget.color,
                             ),
                             Icon(
                               Icons.circle,
-                              color: Colors.red,
+                              color: widget.color,
                             ),
                           ],
                         ),
@@ -243,8 +253,8 @@ class _TimeMachineState extends State<TimeMachine> {
                             value: "28",
                             size: segmentSize,
                             segmentStyle: DefaultSegmentStyle(
-                              enabledColor: Colors.red,
-                              disabledColor: Colors.red.withOpacity(0.15),
+                              enabledColor: widget.color,
+                              disabledColor: widget.color.withOpacity(0.15),
                             ),
                           ),
                         ),
