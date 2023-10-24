@@ -2,6 +2,7 @@ import 'package:birthtime/widgets/tooglebuttons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'widgets/calendar.dart';
+import 'widgets/time_machine.dart';
 import 'package:provider/provider.dart';
 import 'package:birthtime/models/birthDateModel.dart';
 
@@ -9,16 +10,18 @@ void main() {
   // On définit un Provider sur le BirtDateModel
   // Il sera utilisable dans toutes les classes filles
   // qui feront appel au BirthDateModel
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider(create: (_) => BirthDateModel()),
-    ],
-    child: MyApp(),
-  ),);
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => BirthDateModel()),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
-  final String title ="Birth Time Elapsed";
+  final String title = "Birth Time Elapsed";
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -43,7 +46,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,11 +56,11 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: [
             BDToggleButtons(key: UniqueKey()),
-            BirthCalendar(),
+            //BirthCalendar(),
+            TimeMachine(),
           ],
         ),
       ),
     );
   }
-
 }
