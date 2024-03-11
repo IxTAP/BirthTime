@@ -105,12 +105,12 @@ class BirthCalendar extends StatelessWidget {
                         ':' +
                         _service.format2chars(
                             context.watch<BirthDateModel>().birthDate.minute),
-                    size: 18.0,
+                    size: 10.0,
                     characterSpacing: 8,
                     backgroundColor: Colors.transparent,
                     segmentStyle: HexSegmentStyle(
-                      enabledColor: Colors.lightGreen[600],
-                      disabledColor: Colors.lightGreen[600]?.withOpacity(0.2),
+                      enabledColor: Colors.red[600],
+                      disabledColor: Colors.red[600]?.withOpacity(0.1),
                     ),
                   ),
                 ),
