@@ -1,7 +1,6 @@
 import 'package:birthtime/widgets/tooglebuttons.dart';
 import 'package:flutter/material.dart';
 import 'widgets/calendar.dart';
-//import 'widgets/time_machine.dart';
 import 'package:provider/provider.dart';
 import 'package:birthtime/models/birthDateModel.dart';
 
@@ -56,18 +55,6 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             BDToggleButtons(key: UniqueKey()),
             BirthCalendar(),
-            // TimeMachine(
-            //   title: "DESTINATION TIME",
-            //   color: Colors.red,
-            // ),
-            // TimeMachine(
-            //   title: "PRESENT TIME",
-            //   color: Colors.green,
-            // ),
-            // TimeMachine(
-            //   title: "TIME ELAPSED",
-            //   color: Colors.blue,
-            // ),
           ],
         ),
       ),
