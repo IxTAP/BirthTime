@@ -33,6 +33,16 @@ const List<String> LIST_MONTHS = [
   'Décembre'
 ];
 
+const List<String> LIST_DAYS = [
+  'Dimanche',
+  'Lundi',
+  'Mardi',
+  'Mercredi',
+  'Jeudi',
+  'Vendredi',
+  'Samedi'
+];
+
 const NB_DAYS_PER_YEAR = 365.25;
 const NB_DAYS_PRE_MONTH = 30.44;
 const NB_MONTHS_PER_YEAR = 12;

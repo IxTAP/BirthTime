@@ -21,63 +21,78 @@ class BirthCalendar extends StatelessWidget {
       children: [
         InkWell(
           onTap: () => context.read<BirthDateModel>().selectDate(context),
-          child: Column(
-            children: [
-              Container(
-                height: 60.0,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10.0),
-                        topRight: Radius.circular(10.0)),
-                    border: Border.all(color: Colors.black),
-                    color: Colors.red[800]),
-                width: MediaQuery.of(context).size.width / 2,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Center(
-                    child: Text(
-                      '${Constants.LIST_MONTHS[context.watch<BirthDateModel>().birthDate.month - 1]}',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20.0,
-                          color: Colors.black),
+          child: Container(
+            width: MediaQuery.of(context).size.width / 2,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(10.0),),
+              border: Border.all(color: Colors.grey.shade400, width: 15.0),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey,
+                  blurRadius: 5.0,
+                  spreadRadius: 5.0,
+                  offset: Offset(3, 3)
+                )
+              ]
+            ),
+            child: Column(
+              children: [
+                Container(
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Center(
+                      child: Text(
+                        '${Constants.LIST_DAYS[context.watch<BirthDateModel>().birthDate.weekday].toUpperCase()}',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0,
+                            color: Colors.black),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Container(
-                height: 120.0,
-                width: MediaQuery.of(context).size.width / 2,
-                decoration:
-                    BoxDecoration(border: Border.all(color: Colors.black)),
-                child: Center(
-                  child: Text(
-                    '${_service.format2chars(context.watch<BirthDateModel>().birthDate.day)}',
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 60.0),
+                Container(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Center(
+                    child: Transform.scale(
+                      scaleX: 1.2,
+                      scaleY: 2.2,
+                      child: Text(
+                        '${context.watch<BirthDateModel>().birthDate.day}',
+                        style:
+                            TextStyle(fontWeight: FontWeight.bold, fontSize: 60.0, color: Colors.red ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
                   ),
                 ),
-              ),
-              Container(
-                height: 60.0,
-                width: MediaQuery.of(context).size.width / 2,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(10.0),
-                        bottomRight: Radius.circular(10.0)),
-                    border: Border.all(color: Colors.black),
-                    color: Colors.black45),
-                child: Center(
-                  child: Text(
-                    '${context.watch<BirthDateModel>().birthDate.year}',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20.0,
-                        color: Colors.white),
+                Container(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Center(
+                    child: Column(
+                      children: [
+                        Text(
+                          '${Constants.LIST_MONTHS[context.watch<BirthDateModel>().birthDate.month - 1].toUpperCase()}',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0,
+                              color: Colors.black),
+                        ),
+                        Text(
+                          '${context.watch<BirthDateModel>().birthDate.year}',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0,
+                              color: Colors.black),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
         SizedBox(
@@ -105,7 +120,7 @@ class BirthCalendar extends StatelessWidget {
                         ':' +
                         _service.format2chars(
                             context.watch<BirthDateModel>().birthDate.minute),
-                    size: 10.0,
+                    size: 8.0,
                     characterSpacing: 8,
                     backgroundColor: Colors.transparent,
                     segmentStyle: HexSegmentStyle(

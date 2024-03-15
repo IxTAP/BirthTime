@@ -29,11 +29,13 @@ class _BDToggleButtonsState extends State<BDToggleButtons> {
         SizedBox(height: 20.0),
         Text(
           '${context.watch<BirthDateModel>().response}',
+          style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18.0),
         ),
+        SizedBox(height: 12.0),
         Text(
           '${context.watch<BirthDateModel>().fullResponse}',
         ),
-        SizedBox(height: 60.0),
+        SizedBox(height: 30.0),
       ],
     );
   }
