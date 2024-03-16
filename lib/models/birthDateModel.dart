@@ -1,4 +1,6 @@
 // Utile pour le type TimeOfDay
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:birthtime/services/constants.dart' as Constants;
 import 'package:birthtime/services/BirthDateService.dart';
@@ -22,6 +24,11 @@ class BirthDateModel extends ChangeNotifier {
   String _response = 'Tap on calendar to change...';
   String _fullResponse = '';
   String _level = Constants.LEVEL_YEAR;
+
+  // Init a fake timer
+  Timer _timer = Timer(Duration(seconds: 1), () => {
+    // Do nothing
+  });
 
   ///
   /// Getters
@@ -47,6 +54,8 @@ class BirthDateModel extends ChangeNotifier {
 
   void differenceChange() {
     _difference = DateTime.now().toUtc().difference(this._birthDate.toUtc());
+    getStringByLevel(_level);
+    responseChange(_response);
     notifyListeners();
   }
 
@@ -58,6 +67,13 @@ class BirthDateModel extends ChangeNotifier {
   void fullResponseChange(String fullResponse) {
     _fullResponse = fullResponse;
     notifyListeners();
+  }
+
+  void autoChangeNow() {
+    _timer.cancel();
+    _timer = Timer.periodic(Duration(minutes: 1), (timer) {
+      differenceChange();
+    });
   }
 
   ///
@@ -117,8 +133,7 @@ class BirthDateModel extends ChangeNotifier {
     // Mise à jour des variables exposées
     birthTimeChange(_birthTime);
     differenceChange();
-    getStringByLevel(_level);
-    responseChange(_response);
+    autoChangeNow();
   }
 
   // REPONSE
