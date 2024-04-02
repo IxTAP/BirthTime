@@ -15,6 +15,11 @@ class _BDToggleButtonsState extends State<BDToggleButtons> {
   List<bool> _isSelected = [true, false, false, false, false];
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [

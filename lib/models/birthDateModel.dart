@@ -76,6 +76,12 @@ class BirthDateModel extends ChangeNotifier {
     });
   }
 
+  void stopTimer() {
+    if(_timer.isActive) {
+      _timer.cancel();
+    }
+  }
+
   ///
   /// Methodes publiques
   ///

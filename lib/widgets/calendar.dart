@@ -43,7 +43,7 @@ class BirthCalendar extends StatelessWidget {
                     padding: const EdgeInsets.all(12.0),
                     child: Center(
                       child: Text(
-                        '${Constants.LIST_DAYS[context.watch<BirthDateModel>().birthDate.weekday].toUpperCase()}',
+                        '${Constants.LIST_DAYS[context.watch<BirthDateModel>().birthDate.weekday - 1].toUpperCase()}',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20.0,
