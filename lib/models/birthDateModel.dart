@@ -1,11 +1,11 @@
 // Utile pour le type TimeOfDay
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:birthtime/services/constants.dart' as Constants;
 import 'package:birthtime/services/BirthDateService.dart';
 
 class BirthDateModel extends ChangeNotifier {
+
   BirthDateService _service = BirthDateService();
 
   ///
@@ -21,8 +21,14 @@ class BirthDateModel extends ChangeNotifier {
 
   TimeOfDay _birthTime = TimeOfDay.now();
   Duration _difference = Duration();
-  String _response = 'Tap on calendar to change...';
-  String _fullResponse = '';
+  int _response = 0;
+  Map<String, int> _fullResponse = {
+    'years': 0,
+    'months': 0,
+    'days': 0,
+    'hours': 0,
+    'minutes': 0,
+  };
   String _level = Constants.LEVEL_YEAR;
 
   // Init a fake timer
@@ -36,8 +42,8 @@ class BirthDateModel extends ChangeNotifier {
   DateTime get birthDate => _birthDate;
   TimeOfDay get birthTime => _birthTime;
   Duration get difference => _difference;
-  String get response => _response;
-  String get fullResponse => _fullResponse;
+  int get response => _response;
+  Map<String, int> get fullResponse => _fullResponse;
 
   ///
   /// Notifications des changements (Provider)
@@ -59,12 +65,12 @@ class BirthDateModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void responseChange(String response) {
+  void responseChange(int response) {
     _response = response;
     notifyListeners();
   }
 
-  void fullResponseChange(String fullResponse) {
+  void fullResponseChange(Map<String, int> fullResponse) {
     _fullResponse = fullResponse;
     notifyListeners();
   }
@@ -91,6 +97,19 @@ class BirthDateModel extends ChangeNotifier {
     DateTime newDate = DateTime.now();
 
     final DateTime? picked = await showDatePicker(
+      builder: (BuildContext context, Widget? child) {
+        Locale locale = Localizations.localeOf(context);
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(
+            alwaysUse24HourFormat: true,
+          ),
+          child: Localizations.override(
+            context: context,
+            locale: locale,
+            child: child!,
+          )
+        );
+      },
       context: context,
       initialDate:_birthDate ,
       firstDate: DateTime(0),
@@ -117,6 +136,19 @@ class BirthDateModel extends ChangeNotifier {
   // Pop-up TIME
   selectTime(BuildContext context) async {
     final TimeOfDay? pickedTime = await showTimePicker(
+        builder: (BuildContext context, Widget? child) {
+          Locale locale = Localizations.localeOf(context);
+          return MediaQuery(
+              data: MediaQuery.of(context).copyWith(
+                alwaysUse24HourFormat: true,
+              ),
+              child: Localizations.override(
+                context: context,
+                locale: locale,
+                child: child!,
+              )
+          );
+        },
         context: context,
         initialTime: TimeOfDay(
           hour: _birthDate.hour,
@@ -145,7 +177,7 @@ class BirthDateModel extends ChangeNotifier {
   // REPONSE
   void getStringByLevel(String level) {
     _level = level;
-    var res = '';
+    var res = 0;
     switch(level) {
       case Constants.LEVEL_YEAR:
         res = _service.getResponseForYear(_difference);
@@ -162,11 +194,11 @@ class BirthDateModel extends ChangeNotifier {
       case Constants.LEVEL_MINUT:
         res = _service.getResponseForMinuts(_difference);
         break;
-      case Constants.LEVEL_TOTAL:
-        res = _service.getFullElapsedTime(_birthDate);
-        break;
+      //case Constants.LEVEL_TOTAL:
+      //  res = _service.getFullElapsedTime(_birthDate);
+      //  break;
       default :
-        res = "T O D O  !!!";
+        res = 0;
     }
 
     _response = res;

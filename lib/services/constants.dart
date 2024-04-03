@@ -1,14 +1,12 @@
 ///
 ///  Fichier de constantes
 ///
-
-
 const String LEVEL_TOTAL = "Total";
-const String LEVEL_YEAR = "Années";
-const String LEVEL_DAY = "Jours";
-const String LEVEL_MONTH = "Mois";
-const String LEVEL_HOUR = "Heures";
-const String LEVEL_MINUT = "Minutes";
+const String LEVEL_YEAR = "years";
+const String LEVEL_DAY = "days";
+const String LEVEL_MONTH = "months";
+const String LEVEL_HOUR = "hours";
+const String LEVEL_MINUT = "minutes";
 
 const List<String> LIST_LEVEL = [
   LEVEL_YEAR,
@@ -16,31 +14,6 @@ const List<String> LIST_LEVEL = [
   LEVEL_DAY,
   LEVEL_HOUR,
   LEVEL_MINUT
-];
-
-const List<String> LIST_MONTHS = [
-  'Janvier',
-  'Février',
-  'Mars',
-  'Avril',
-  'Mai',
-  'Juin',
-  'Juillet',
-  'Août',
-  'Septembre',
-  'Octobre',
-  'Novembre',
-  'Décembre'
-];
-
-const List<String> LIST_DAYS = [
-  'Lundi',
-  'Mardi',
-  'Mercredi',
-  'Jeudi',
-  'Vendredi',
-  'Samedi',
-  'Dimanche'
 ];
 
 const NB_DAYS_PER_YEAR = 365.25;

@@ -20,27 +20,27 @@ class BirthDateService extends ChangeNotifier {
     return numberFormat.format(number);
   }
 
-  String getResponseForYear(Duration difference) {
-    return '${formatDecimal((difference.inDays / Constants.NB_DAYS_PER_YEAR).floor())} an(s)';
+  int getResponseForYear(Duration difference) {
+    return (difference.inDays / Constants.NB_DAYS_PER_YEAR).floor();
   }
 
-  String getResponseForMonths(Duration difference) {
-    return '${formatDecimal((difference.inDays / Constants.NB_DAYS_PRE_MONTH).floor())} mois';
+  int getResponseForMonths(Duration difference) {
+    return (difference.inDays / Constants.NB_DAYS_PRE_MONTH).floor();
   }
 
-  String getResponseForDays(Duration difference) {
-    return '${formatDecimal(difference.inDays)} jour(s)';
+  int getResponseForDays(Duration difference) {
+    return difference.inDays;
   }
 
-  String getResponseForMinuts(Duration difference) {
-    return '${formatDecimal(difference.inMinutes)} minute(s)';
+  int getResponseForMinuts(Duration difference) {
+    return difference.inMinutes;
   }
 
-  String getResponseForHours(Duration difference) {
-    return '${formatDecimal(difference.inHours)} heure(s)';
+  int getResponseForHours(Duration difference) {
+    return difference.inHours;
   }
 
-  String getFullElapsedTime(DateTime birthDate) {
+  Map<String, int> getFullElapsedTime(DateTime birthDate) {
     var currentDate = DateTime.now().toUtc();
     var difference = currentDate.difference(birthDate);
 
@@ -58,6 +58,13 @@ class BirthDateService extends ChangeNotifier {
 
     var diffMinutes = difference.inMinutes % Constants.NB_MINUTS_PER_HOUR;
 
-    return '${diffAnnees.floor()} ans, ${diffMois.floor()} mois, ${difference.inDays} jours\n$diffHeures heures et $diffMinutes minutes';
+    return {
+      'years': diffAnnees.floor(),
+      'months': diffMois.floor(),
+      'days': difference.inDays,
+      'hours': diffHeures,
+      'minutes': diffMinutes,
+    };
+    //return '${diffAnnees.floor()} ans, ${diffMois.floor()} mois, ${difference.inDays} jours\n$diffHeures heures et $diffMinutes minutes';
   }
 }

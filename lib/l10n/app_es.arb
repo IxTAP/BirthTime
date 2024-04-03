@@ -1,0 +1,58 @@
+{
+    "years": "{count, plural, =0{Años} =1{Año} other{Años}}",
+    "@years": {
+      "description": "Plural years",
+      "placeholders": {
+        "count": {
+          "type": "num",
+          "format": "compact"
+        }
+      }
+    },
+
+    "months": "{count, plural, =0{Meses} =1{Mes} other{Meses}}",
+    "@months": {
+      "description": "Plural months",
+      "placeholders": {
+        "count": {
+          "type": "num",
+          "format": "compact"
+        }
+      }
+    },
+
+    "days": "{count, plural, =0{Días} =1{Día} other{Días}}",
+    "@days": {
+      "description": "Plural days",
+      "placeholders": {
+        "count": {
+          "type": "num",
+          "format": "compact"
+        }
+      }
+    },
+
+    "hours": "{count, plural, =0{Horas} =1{Hora} other{Horas}}",
+    "@hours": {
+      "description": "Plural hours",
+      "placeholders": {
+        "count": {
+          "type": "num",
+          "format": "compact"
+        }
+      }
+    },
+
+    "minutes": "{count, plural, =0{Minutos} =1{Minuto} other{Minutos}}",
+    "@minutes": {
+      "description": "Plural minutes",
+      "placeholders": {
+        "count": {
+          "type": "num",
+          "format": "compact"
+        }
+      }
+    },
+
+    "tap": "Toca el calendario para cambiar"
+}

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:birthtime/services/BirthDateService.dart';
-import 'package:birthtime/services/constants.dart' as Constants;
+import 'package:intl/intl.dart';
 import 'package:segment_display/segment_display.dart';
 import 'package:birthtime/models/birthDateModel.dart';
 import 'package:provider/provider.dart';
 
 ///
-/// Widget qui affiche le calendrier et l'horloge.
-/// Il ouvre les champs de saisie et mets à jour le model.
+/// Display calendar and clock.
+/// Update date and time selected.
 ///
 class BirthCalendar extends StatelessWidget {
   final BirthDateService _service = BirthDateService();
@@ -15,8 +15,7 @@ class BirthCalendar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return
-        // Réagit au Tap sur l'ensemble de la colonne
-        Column(
+      Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         InkWell(
@@ -43,7 +42,7 @@ class BirthCalendar extends StatelessWidget {
                     padding: const EdgeInsets.all(12.0),
                     child: Center(
                       child: Text(
-                        '${Constants.LIST_DAYS[context.watch<BirthDateModel>().birthDate.weekday - 1].toUpperCase()}',
+                        DateFormat.EEEE(Localizations.localeOf(context).languageCode).format(context.watch<BirthDateModel>().birthDate).toUpperCase(),
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20.0,
@@ -74,7 +73,8 @@ class BirthCalendar extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(
-                          '${Constants.LIST_MONTHS[context.watch<BirthDateModel>().birthDate.month - 1].toUpperCase()}',
+                          //'${Constants.LIST_MONTHS[context.watch<BirthDateModel>().birthDate.month - 1].toUpperCase()}',
+                          DateFormat.MMMM(Localizations.localeOf(context).languageCode).format(context.watch<BirthDateModel>().birthDate).toUpperCase(),
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20.0,
