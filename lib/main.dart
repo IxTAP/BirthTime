@@ -1,6 +1,8 @@
+import 'dart:convert';
+
+import 'package:birthtime/widgets/drawer.dart';
 import 'package:birthtime/widgets/tooglebuttons.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'widgets/calendar.dart';
 import 'package:provider/provider.dart';
@@ -48,12 +50,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
+      drawer: BTDrawer(key: UniqueKey()),
       body: SingleChildScrollView(
         child: Column(
           children: [

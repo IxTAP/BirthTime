@@ -1,3 +1,4 @@
+import 'package:birthtime/models/BDFavorite.dart';
 import 'package:flutter/material.dart';
 import 'package:birthtime/services/BirthDateService.dart';
 import 'package:intl/intl.dart';
@@ -9,11 +10,18 @@ import 'package:provider/provider.dart';
 /// Display calendar and clock.
 /// Update date and time selected.
 ///
-class BirthCalendar extends StatelessWidget {
+class BirthCalendar extends StatefulWidget {
+  @override
+  State<BirthCalendar> createState() => _BirthCalendarState();
+}
+
+class _BirthCalendarState extends State<BirthCalendar> {
   final BirthDateService _service = BirthDateService();
 
   @override
   Widget build(BuildContext context) {
+    bool favorite = context.watch<BirthDateModel>().favorite.name != "";
+
     return
       Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -133,6 +141,23 @@ class BirthCalendar extends StatelessWidget {
             ],
           ),
         ),
+        IconButton(
+        icon: Icon(
+            favorite
+              ? Icons.favorite
+              : Icons.favorite_border,
+            color: favorite ? Colors.red : null,
+          ),
+          onPressed: () {
+            //favorite = !favorite;
+            context.read<BirthDateModel>().addToFavorite(
+              new Favorite("coucou", DateTime(2020))
+            );
+          },
+        ),
+        favorite ? Text(context.watch<BirthDateModel>().favorite.name)
+            :
+            Text("")
       ],
     );
   }

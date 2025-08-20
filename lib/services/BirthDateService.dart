@@ -1,11 +1,7 @@
-//import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:birthtime/services/constants.dart' as Constants;
 
 class BirthDateService extends ChangeNotifier {
-  final format = DateFormat("EEEE, MMMM d, yyyy 'at' h:mma");
-  NumberFormat numberFormat = NumberFormat.decimalPattern('fr');
 
   // Ajoute un zéro si nombre a 1 seul caractère.
   String format2chars(int number) {
@@ -14,10 +10,6 @@ class BirthDateService extends ChangeNotifier {
     }
 
     return number.toString();
-  }
-
-  String formatDecimal(int number) {
-    return numberFormat.format(number);
   }
 
   int getResponseForYear(Duration difference) {
@@ -65,6 +57,5 @@ class BirthDateService extends ChangeNotifier {
       'hours': diffHeures,
       'minutes': diffMinutes,
     };
-    //return '${diffAnnees.floor()} ans, ${diffMois.floor()} mois, ${difference.inDays} jours\n$diffHeures heures et $diffMinutes minutes';
   }
 }

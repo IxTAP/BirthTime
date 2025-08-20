@@ -1,5 +1,6 @@
 // Utile pour le type TimeOfDay
 import 'dart:async';
+import 'package:birthtime/models/BDFavorite.dart';
 import 'package:flutter/material.dart';
 import 'package:birthtime/services/constants.dart' as Constants;
 import 'package:birthtime/services/BirthDateService.dart';
@@ -36,6 +37,8 @@ class BirthDateModel extends ChangeNotifier {
     // Do nothing
   });
 
+  Favorite _favorite = new Favorite("", DateTime.now());
+
   ///
   /// Getters
   ///
@@ -44,6 +47,7 @@ class BirthDateModel extends ChangeNotifier {
   Duration get difference => _difference;
   int get response => _response;
   Map<String, int> get fullResponse => _fullResponse;
+  Favorite get favorite => _favorite;
 
   ///
   /// Notifications des changements (Provider)
@@ -86,6 +90,19 @@ class BirthDateModel extends ChangeNotifier {
     if(_timer.isActive) {
       _timer.cancel();
     }
+  }
+
+  void favoriteChange(Favorite favorite) {
+    _favorite = favorite;
+    setBirthDate(favorite.date);
+  }
+
+  void addToFavorite(Favorite favorite) {
+    print("Favori ajouté");
+  }
+
+  void removeToFavorite(Favorite favorite) {
+    print("Favori supprimé");
   }
 
   ///
@@ -170,6 +187,12 @@ class BirthDateModel extends ChangeNotifier {
 
     // Mise à jour des variables exposées
     birthTimeChange(_birthTime);
+    differenceChange();
+    autoChangeNow();
+  }
+
+  void setBirthDate(DateTime datetime) {
+    birthDateChange(datetime);
     differenceChange();
     autoChangeNow();
   }

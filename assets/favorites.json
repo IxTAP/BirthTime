@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Patrick",
+    "date": {
+      "year": 1970,
+      "month": 11,
+      "day": 24,
+      "hour": 8,
+      "minute": 45
+    }
+  },
+  {
+    "name": "Marie",
+    "date": {
+      "year": 1967,
+      "month": 8,
+      "day": 12,
+      "hour": 12,
+      "minute": 0
+    }
+  },{
+  "name": "Cédric",
+  "date": {
+    "year": 1999,
+    "month": 12,
+    "day": 19,
+    "hour": 13,
+    "minute": 27
+  }
+}
+
+]
